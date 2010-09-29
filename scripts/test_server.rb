@@ -8,9 +8,9 @@ p File.dirname(__FILE__) + '/../lib'
 set :public, File.dirname(__FILE__) + '/../lib'
 
 get '/' do
-  '<html><head><title>Choose an environment</title></head><body><h1>Choose an environment</h1><form action="/env"><input type="text" name="id" value="7535" /><input type="submit" /></form></body></html>'
+  '<html><head><title>Choose an environment</title></head><body><h1>Choose an environment</h1><form action="/env">Environment id:<br /><input type="text" name="id" value="7535" /><br />Api key:<br /><input type="text" name="id" value="7535" /><br /><input type="submit" /></form></body></html>'
 end
 
 get '/env' do
-  %|<!DOCTYPE html><html><head><title>Viewing Environment #{params['id']}</title><script src="/pbloader.js"></script></head><body><div id="graph" class="pachube-graph" pachube-resource="feeds/#{params['id']}/datastreams/0" pachube-key="123abc" style="width:640px;height:480px;background:#EEE;">Graph #{params['id']}</div></body></html>|
+  %|<!DOCTYPE html><html><head><title>Viewing Environment #{params['id']}</title><script src="/pbloader.js"></script></head><body><div id="graph" class="pachube-graph" pachube-resource="feeds/#{params['id']}/datastreams/0" pachube-key="#{params['key']}" style="width:640px;height:480px;background:#EEE;">Graph #{params['id']}</div></body></html>|
 end
