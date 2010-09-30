@@ -8,7 +8,7 @@ p File.dirname(__FILE__) + '/../lib'
 set :public, File.dirname(__FILE__) + '/../lib'
 
 get '/' do
-  '<html><head><title>Choose an environment</title></head><body><h1>Choose an environment</h1><form action="/env">Environment id:<br /><input type="text" name="id" value="7535" /><br />Api key:<br /><input type="text" name="key" value="" /><br /><input type="submit" /></form></body></html>'
+  '<html><head><title>Choose an environment</title></head><body><h1>Choose an environment</h1><form action="/env">Environment id:<br /><input type="text" name="id" value="504" /><br />Datastream id:<br /><input type="text" name="stream_id" value="1" /><br />Api key:<br /><input type="text" name="key" value="" /><br /><input type="submit" /></form></body></html>'
 end
 
 get '/env' do
