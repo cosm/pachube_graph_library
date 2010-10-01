@@ -1,0 +1,24 @@
+Pachube JS Widgets
+==================
+
+Usage:
+
+  In your page include:
+
+    <head>
+      <script src="http://www.pachube.com/widgets/pbloader.js"></script>
+    </head>
+
+    <body>
+      <!-- For each graph you want, include: -->
+      <div id="graph" class="pachube-graph" pachube-resource="feeds/FEED_ID/datastreams/DATASTREAM_ID" pachube-key="API_KEY" style="width:WIDTH; height:HEIGHT;">&nbsp;</div>
+    </body>
+
+Options:
+  Optional settings you can use to set up your graph include:
+    static          Ensures the graph is always centered
+                    around the current timespan.
+                    (i.e. Midnight-to-Midnight, or Hour-to-Hour)
+
+    update="auto"   Automatically updates the graph with
+                    new data every 5 minutes.
