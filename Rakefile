@@ -5,13 +5,13 @@ task :default => :test
 
 desc 'Test the js widgets.'
 task :test do
-  sh 'firefox jswidgets/test/index.html'
+  sh 'firefox lib/test/index.html'
 end
 
 desc 'Run jscoverage tests.'
 task :coverage do
   directory = File.dirname(__FILE__)
   sh "rm -r #{directory}/instrumented" if File.directory?("#{directory}/instrumented")
-  sh "#{directory}/jscoverage/jscoverage #{directory}/jswidgets #{directory}/instrumented"
+  sh "#{directory}/jscoverage/jscoverage #{directory}/lib #{directory}/instrumented"
   sh "firefox #{directory}/instrumented/jscoverage.html"
 end
