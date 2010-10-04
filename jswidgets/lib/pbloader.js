@@ -33,10 +33,11 @@ var pbloader = new function() {
 
   this.load = function(){
     loadScripts(jquery_files, function(){
-        loadScripts(pachube_files, function(){
-          $.PB.setup_widgets();
-        })
+      loadScripts(pachube_files, function(){
+        $.PB.setup_widgets();
       });
+    });
+    return true;
   };
 }
 
