@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 31
+/svn/!svn/ver/89/trunk/adapters
+END
+qunit_assertions.js
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/89/trunk/adapters/qunit_assertions.js
+END
+yui_assertions.js
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/89/trunk/adapters/yui_assertions.js
+END
