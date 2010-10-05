@@ -12,11 +12,8 @@ function PachubeGraph(element) {
 }
 
 PachubeGraph.prototype.init = function(element) {
-  var options = {
-    resource: ''
-  , api_key: ''
-  };
-  pachubeAPI.datastreamGet(options);
+  $.widget('ui.pachube-graph', {
+  });
 };
 
 PachubeGraph.initAll = function() {
