@@ -1,9 +1,4 @@
-$.widget('ui.pachube_graph', {
-  
-});
-
 function PachubeGraph(element) {
-  // Magic Incantation to enforce instantiation
   if (! (this instanceof arguments.callee)) {
     return new arguments.callee(arguments);
   }
@@ -11,13 +6,18 @@ function PachubeGraph(element) {
   var self = this;
 
   if (element != undefined) {
-    self.init(element);
+    self.element = element;
   }
+
+  self.init = function() {
+
+  }
+
+  self.init();
 }
 
-PachubeGraph.prototype.init = function(element) {
-  //$(element).pachube_graph();
-};
-
-PachubeGraph.initAll = function() {
-};
+$.widget('ui.pachubeGraph', {
+  _create: function() {
+    this.element.graph = PachubeGraph(this.element)
+  }
+});
