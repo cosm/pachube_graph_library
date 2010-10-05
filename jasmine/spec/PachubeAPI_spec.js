@@ -1,8 +1,6 @@
-describe("pachubeAPI", function(){
-  var api;
-
+describe("PachubeAPI", function(){
   beforeEach(function(){
-    api = new pachubeAPI();
+    var api = new PachubeAPI();
   });
 
   it("should be defined", function(){
@@ -14,7 +12,7 @@ describe("pachubeAPI", function(){
   });
 
   it("should take an optional api_key and set it when creating the api", function(){
-    api = new pachubeAPI("myApiKey");
-    expect(api.apiKey == "myApiKey");
+    api = new PachubeAPI({ api_key: "myApiKey"});
+    expect(api.settings.api_key == "myApiKey");
   });
 });
