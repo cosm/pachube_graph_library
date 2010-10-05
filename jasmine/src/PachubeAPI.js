@@ -40,3 +40,5 @@ PachubeAPI.prototype.datastreamGet = function(options) {
   , dataType: 'jsonp'
   });
 };
+
+var pachubeAPI = new PachubeAPI();

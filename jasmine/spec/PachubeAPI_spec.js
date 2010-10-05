@@ -9,6 +9,11 @@ describe("PachubeAPI", function() {
     expect(api).not.toEqual(undefined);
   });
 
+  it("an instance should be accessible at pachubeAPI", function() {
+    expect(pachubeAPI).not.toEqual(undefined);
+    expect(pachubeAPI instanceof PachubeAPI);
+  });
+
   it("should take an optional api_key and set it when creating the api", function() {
     api = new PachubeAPI({ api_key: "myApiKey"});
     expect(api.settings.api_key).toEqual("myApiKey");
