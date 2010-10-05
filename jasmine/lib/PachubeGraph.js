@@ -1,3 +1,7 @@
+$.widget('ui.pachube_graph', {
+  
+});
+
 function PachubeGraph(element) {
   // Magic Incantation to enforce instantiation
   if (! (this instanceof arguments.callee)) {
@@ -12,8 +16,7 @@ function PachubeGraph(element) {
 }
 
 PachubeGraph.prototype.init = function(element) {
-  $.widget('ui.pachube-graph', {
-  });
+  //$(element).pachube_graph();
 };
 
 PachubeGraph.initAll = function() {
