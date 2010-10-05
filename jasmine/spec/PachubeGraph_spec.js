@@ -4,8 +4,7 @@ describe("PachubeGraph", function() {
   var minimal_graph;
 
   beforeEach(function() {
-    minimal_element = '<div id="graph" class="pachube-graph" pachube-resource="myResource" pachube-key="myApiKey" style="width: 640px; height: 480px;"></div>';
-    minimal_graph = new PachubeGraph(minimal_element);
+    loadFixtures('fixtures/minimal_graph.html')
   });
 
   it("should be defined", function() {
@@ -17,12 +16,13 @@ describe("PachubeGraph", function() {
     expect(graph.init).not.toEqual(undefined);
   });
 
-  it("init should parse an html element and call $.widget", function() {
-    spyOn($, 'widget');
+  it("init should parse an html element and call $(element).pachube_graph", function() {
+    var div = $('.pachube-graph').element;
+    spyOn(div, 'pachube_graph');
 
-    minimal_graph.init();
+    (new PachubeGraph(div)).init();
 
-    expect($.widget).toHaveBeenCalled();
+    expect(div.pachube_graph).toHaveBeenCalled();
   });
 
   it("should have an 'initAll' method", function() {
