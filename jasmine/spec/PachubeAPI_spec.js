@@ -19,6 +19,34 @@ describe("PachubeAPI", function() {
     expect(api.settings.api_key).toEqual("myApiKey");
   });
 
+  it("should be possible to call it through the class", function() {
+    spyOn($, 'ajax');
+    var callback = function() {};
+    var options = {
+      resource: "myResource"
+    , api_key: "myApiKey"
+    , interval: 500
+    , start: new Date()
+    , end: new Date()
+    , per_page: 2000
+    , callback: callback
+    };
+
+    runs(function() {
+      PachubeAPI().datastreamGet(options);
+    });
+
+    waits(500);
+
+    runs(function() {
+      expect($.ajax).toHaveBeenCalledWith({
+        url: 'http://api.pachube.com/v2/' + options.resource + '.json?key=' + options.api_key + '&interval=' + options.interval + '&start=' + options.start.toISOString() + '&end=' + options.end.toISOString() + '&per_page=' + options.per_page
+      , success: options.callback
+      , dataType: 'jsonp'
+      });
+    });
+  });
+
   it("should have a datastreamGet function", function() {
     expect(api.datastreamGet).not.toEqual(undefined);
   });

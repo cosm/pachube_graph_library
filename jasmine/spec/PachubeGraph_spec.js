@@ -27,6 +27,7 @@ describe("PachubeGraph", function() {
     expect(minimal[0].graph.settings.api_key).toEqual("myApiKey");
     expect(minimal[0].graph.settings.rolling).toEqual(false);
     expect(minimal[0].graph.settings.update).toEqual(false);
+    expect(minimal[0].graph.settings.per_page).toEqual(2000);
   });
 
   it("should parse a timespan values and set timespan and interval accordingly", function() {
@@ -65,15 +66,43 @@ describe("PachubeGraph", function() {
     expect(minimal[0].graph.data).not.toEqual(undefined);
   });
 
-  it("should send call the api to fetch the initial data", function() {
-    spyOn(pachubeAPI, datastreamGet);
+  it("should call the api to fetch the initial data", function() {
+    spyOn($, 'ajax');
 
+    runs(function() {
+      minimal.pachubeGraph();
+    });
+
+    waits(500);
+
+    runs(function() {
+      expect($.ajax).toHaveBeenCalled();
+    });
+  });
+
+  it("should have an 'update' method", function() {
+    minimal.pachubeGraph();
+    expect(minimal[0].graph.update).not.toEqual(undefined);
+  });
+
+  it("should have a 'draw' method", function() {
+    minimal.pachubeGraph();
+    expect(minimal[0].graph.draw).not.toEqual(undefined);
+  });
+
+  it("'update' should call 'draw'", function() {
     minimal.pachubeGraph();
 
-    expect(pachubeAPI.datastreamGet).toHaveBeenCalledWith({
-      resource: minimal[0].graph.settings.resource
-    , api_key: minimal[0].graph.settings.api_key
-    , interval: minimal[0].graph.settings.interval
+    spyOn(minimal[0].graph, 'draw');
+
+    runs(function() {
+      minimal[0].graph.update();
+    });
+
+    waits(500);
+
+    runs(function() {
+      expect(minimal[0].graph.draw).toHaveBeenCalled();
     });
   });
 });

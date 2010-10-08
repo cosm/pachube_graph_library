@@ -15,12 +15,15 @@ function PachubeGraph(element) {
     , api_key: self.element.attr('pachube-key')
     , rolling: false
     , update: false
+    , per_page: 2000
     };
 
     self.set_timespan_and_interval();
 
     // Where we will store fetched data
     self.data = new Array();
+
+    self.update();
   }
 
   self.set_timespan_and_interval = function() {
@@ -43,6 +46,30 @@ function PachubeGraph(element) {
         self.settings.interval = 900;
         break;
     }
+  }
+
+  // Fetches the data needed and calls draw
+  self.update = function() {
+    var end = new Date();
+    var start = new Date(end - self.settings.interval);
+
+    PachubeAPI().datastreamGet({
+      resource: self.settings.resource
+    , api_key: self.settings.api_key
+    , start: start
+    , end: end
+    , interval: self.settings.interval
+    , per_page: 2000
+    , callback: function(result) {
+        self.data << result.datapoints; // FIXME: This is not right
+        self.draw();
+      }
+    });
+  }
+
+  // (Re)draws the graph from self.data
+  self.draw = function() {
+    
   }
 
   self.init(element);
