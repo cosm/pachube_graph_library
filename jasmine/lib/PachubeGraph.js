@@ -5,19 +5,24 @@ function PachubeGraph(element) {
 
   var self = this;
 
-  if (element != undefined) {
-    self.element = element;
+  self.init = function(element) {
+    if (element != undefined) {
+      self.element = element;
+    }
+
+    self.settings = {
+      resource: self.element.attr('pachube-resource')
+    , api_key: self.element.attr('pachube-key')
+    , rolling: false
+    , update: false
+    };
   }
 
-  self.init = function() {
-
-  }
-
-  self.init();
+  self.init(element);
 }
 
 $.widget('ui.pachubeGraph', {
   _create: function() {
-    this.element.graph = PachubeGraph(this.element)
+    this.element[0].graph = new PachubeGraph(this.element)
   }
 });

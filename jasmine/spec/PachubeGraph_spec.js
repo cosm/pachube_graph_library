@@ -1,22 +1,31 @@
 describe("PachubeGraph", function() {
+  var minimal;
+
   beforeEach(function() {
     loadFixtures('fixtures/minimal_graph.html')
+    minimal = $('.pachube-graph');
   });
 
   it("should be able to call $(element).pachubeGraph", function() {
-    var div = $('.pachube-graph');
-    spyOn(div, 'pachubeGraph');
+    spyOn(minimal, 'pachubeGraph');
 
-    div.pachubeGraph();
+    minimal.pachubeGraph();
 
-    expect(div.pachubeGraph).toHaveBeenCalled();
+    expect(minimal.pachubeGraph).toHaveBeenCalled();
   });
 
   it("should call new PachubeGraph(this.element) when I call $(element).pachubeGraph()", function() {
-    var div = $('.pachube-graph');
+    minimal.pachubeGraph();
 
-    div.pachubeGraph()
+    expect(minimal[0].graph instanceof PachubeGraph);
+  });
 
-    expect(div.graph instanceof PachubeGraph);
+  it("PachubeGraph(element) should parse the attributes from the html element", function() {
+    minimal.pachubeGraph();
+
+    expect(minimal[0].graph.settings.resource).toEqual("myResource");
+    expect(minimal[0].graph.settings.api_key).toEqual("myApiKey");
+    expect(minimal[0].graph.settings.rolling).toEqual(false);
+    expect(minimal[0].graph.settings.update).toEqual(false);
   });
 });
