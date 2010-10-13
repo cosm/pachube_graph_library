@@ -5,6 +5,7 @@ describe("PachubeGraph", function() {
   var four_days;
   var three_months;
   var data;
+  var graph_data = [];
   var now = "2010-10-13T14:10:55.747Z";
   var oldAjax = $.ajax;
 
@@ -27,6 +28,13 @@ describe("PachubeGraph", function() {
       , {at: "2010-10-13T14:10:54.747789Z", value: "1312"}
       ];
 
+    graph_data =
+      [ [1286979051747, 1309]
+      , [1286979052747, 1310]
+      , [1286979053747, 1311]
+      , [1286979054747, 1312]
+      ];
+
     $.ajax = function(options) {
       if (options == undefined) { var options = {}; }
 
@@ -34,7 +42,7 @@ describe("PachubeGraph", function() {
       if (options.start != undefined) {
         var new_data = [];
         for(var i=0; i < data.length; i++) {
-          if (data[i].at > options.start) {
+          if (graph_data[i][0] > options.start) {
             new_data.push(data[i]);
           }
         }
@@ -43,7 +51,7 @@ describe("PachubeGraph", function() {
       if (options.end != undefined) {
         var new_data = [];
         for(var i=0; i < data.length; i++) {
-          if (data[i].at < options.end) {
+          if (graph_data[i][0] < options.end) {
             new_data.push(data[i]);
           }
         }
@@ -60,13 +68,6 @@ describe("PachubeGraph", function() {
 
       return result;
     };
-
-    result = $.ajax();
-    graph_data = [];
-    for(var i=0; i < result.datapoints.length; i++) {
-      point = result.datapoints[i];
-      graph_data.push([Date.parse(point.at.substring(0,23) + "Z"), parseFloat(point.value)]);
-    }
   });
 
   afterEach(function() {
@@ -162,21 +163,19 @@ describe("PachubeGraph", function() {
   });
 
   it("'update' should only request new data", function() {
-    now = "2010-10-13T14:10:53.747Z";
     minimal.pachubeGraph();
 
-    expect(minimal[0].graph.data).toEqual([data[0], data[1]]);
+    expect(minimal[0].graph.data).toEqual(graph_data);
 
-    now = "2010-10-13T14:10:55.747Z";
-    minimal[0].graph.update();
-    
-    expect(minimal[0].graph.data).toEqual(data);
+    minimal[0].graph.update(function(results) {
+      expect(results.datapoints).toEqual([]);
+    });
   });
 
   it("'update' should not store duplicate data", function() {
     minimal.pachubeGraph();
     minimal[0].graph.update();
-    expect(minimal[0].graph.data).toEqual(data);
+    expect(minimal[0].graph.data).toEqual(graph_data);
   });
 
   it("'update' should call 'draw'", function() {

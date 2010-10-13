@@ -61,11 +61,17 @@ function PachubeGraph(element) {
     , interval: self.settings.interval
     , per_page: 2000
     , callback: function(result) {
+        var last_received = 0;
+        if (self.data.length > 0) {
+          last_received = self.data[self.data.length - 1][0]
+        }
         for (var i=0; i < result.datapoints.length; i++) {
           var point = result.datapoints[i];
-          self.data.push([Date.parse(point.at.substring(0,23) + "Z"), parseFloat(point.value)]);
+          //point.at = Date.parse(point.at.substring(0,23) + "Z");
+          if (point.at > last_received) {
+            self.data.push([point.at, parseFloat(point.value)]);
+          }
         }
-        self.data << result.datapoints; // FIXME: This is not right
         self.draw();
 
         if (callback != undefined) {
