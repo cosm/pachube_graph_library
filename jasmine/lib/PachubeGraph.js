@@ -61,6 +61,10 @@ function PachubeGraph(element) {
     , interval: self.settings.interval
     , per_page: 2000
     , callback: function(result) {
+        for (var i=0; i < result.datapoints.length; i++) {
+          var point = result.datapoints[i];
+          self.data.push([Date.parse(point.at.substring(0,23) + "Z"), parseFloat(point.value)]);
+        }
         self.data << result.datapoints; // FIXME: This is not right
         self.draw();
       }
