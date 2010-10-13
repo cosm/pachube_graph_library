@@ -49,7 +49,7 @@ function PachubeGraph(element) {
   }
 
   // Fetches the data needed and calls draw
-  self.update = function() {
+  self.update = function(callback) {
     var end = new Date();
     var start = new Date(end - self.settings.interval);
 
@@ -67,6 +67,10 @@ function PachubeGraph(element) {
         }
         self.data << result.datapoints; // FIXME: This is not right
         self.draw();
+
+        if (callback != undefined) {
+          callback(result);
+        }
       }
     });
   }
