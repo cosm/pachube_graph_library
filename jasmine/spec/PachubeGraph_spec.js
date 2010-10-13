@@ -4,6 +4,9 @@ describe("PachubeGraph", function() {
   var twenty_four_hours;
   var four_days;
   var three_months;
+  var data;
+  var now = "2010-10-13T14:10:55.747Z";
+  var oldAjax = $.ajax;
 
   beforeEach(function() {
     loadFixtures('fixtures/minimal_graph.html',
@@ -17,17 +20,38 @@ describe("PachubeGraph", function() {
     four_days = $('#four_days.pachube-graph');
     three_months = $('#three_months.pachube-graph');
 
+    data = 
+      [ {at: "2010-10-13T14:10:51.747789Z", value: "1309"}
+      , {at: "2010-10-13T14:10:52.747789Z", value: "1310"}
+      , {at: "2010-10-13T14:10:53.747789Z", value: "1311"}
+      , {at: "2010-10-13T14:10:54.747789Z", value: "1312"}
+      ];
+
     $.ajax = function(options) {
       if (options == undefined) { var options = {}; }
 
+      // Handle start and end params effectively
+      if (options.start != undefined) {
+        var new_data = [];
+        for(var i=0; i < data.length; i++) {
+          if (data[i].at > options.start) {
+            new_data.push(data[i]);
+          }
+        }
+        data = new_data;
+      }
+      if (options.end != undefined) {
+        var new_data = [];
+        for(var i=0; i < data.length; i++) {
+          if (data[i].at < options.end) {
+            new_data.push(data[i]);
+          }
+        }
+        data = new_data;
+      }
+
       var result = {
-        datapoints:
-          [
-            {at: "2010-10-13T14:10:51.747789Z", value: "1309"}
-          , {at: "2010-10-13T14:10:52.747789Z", value: "1310"}
-          , {at: "2010-10-13T14:10:53.747789Z", value: "1311"}
-          , {at: "2010-10-13T14:10:54.747789Z", value: "1312"}
-          ]
+        datapoints: data
       };
 
       if (options.success != undefined) {
@@ -43,6 +67,10 @@ describe("PachubeGraph", function() {
       point = result.datapoints[i];
       graph_data.push([Date.parse(point.at.substring(0,23) + "Z"), parseFloat(point.value)]);
     }
+  });
+
+  afterEach(function() {
+    $.ajax = oldAjax
   });
 
   it("should be able to call $(element).pachubeGraph", function() {
@@ -131,6 +159,24 @@ describe("PachubeGraph", function() {
     waits(500);
 
     expect(minimal[0].graph.data).toEqual(graph_data);
+  });
+
+  it("'update' should only request new data", function() {
+    now = "2010-10-13T14:10:53.747Z";
+    minimal.pachubeGraph();
+
+    expect(minimal[0].graph.data).toEqual([data[0], data[1]]);
+
+    now = "2010-10-13T14:10:55.747Z";
+    minimal[0].graph.update();
+    
+    expect(minimal[0].graph.data).toEqual(data);
+  });
+
+  it("'update' should not store duplicate data", function() {
+    minimal.pachubeGraph();
+    minimal[0].graph.update();
+    expect(minimal[0].graph.data).toEqual(data);
   });
 
   it("'update' should call 'draw'", function() {
