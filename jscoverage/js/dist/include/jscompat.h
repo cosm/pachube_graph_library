@@ -1,1 +1,0 @@
-../../../js/jscompat.h
