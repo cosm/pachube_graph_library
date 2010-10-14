@@ -8,7 +8,6 @@ describe("PachubeGraph", function() {
   var rolling_graph;
   var data;
   var graph_data;
-  var now = "2010-10-13T14:10:55.747Z";
   var oldAjax = $.ajax;
 
   beforeEach(function() {
@@ -29,16 +28,16 @@ describe("PachubeGraph", function() {
 
     data = 
       [ {at: "2010-10-13T14:10:51.747789Z", value: "1309"}
-      , {at: "2010-10-13T14:10:52.747789Z", value: "1310"}
-      , {at: "2010-10-13T14:10:53.747789Z", value: "1311"}
-      , {at: "2010-10-13T14:10:54.747789Z", value: "1312"}
+      , {at: "2010-10-13T15:10:51.747789Z", value: "1310"}
+      , {at: "2010-10-13T16:10:51.747789Z", value: "1311"}
+      , {at: "2010-10-13T17:10:51.747789Z", value: "1312"}
       ];
 
     graph_data =
       [ [1286979051747, 1309]
-      , [1286979052747, 1310]
-      , [1286979053747, 1311]
-      , [1286979054747, 1312]
+      , [1286982651747, 1310]
+      , [1286986251747, 1311]
+      , [1286989851747, 1312]
       ];
 
     $.ajax = function(options) {
@@ -117,12 +116,13 @@ describe("PachubeGraph", function() {
 
   it("should set the graph start/end times for static graphs", function() {
     minimal.pachubeGraph();
-    expect(minimal[0].graph.end - 0).toEqual((minimal[0].graph.end % minimal[0].graph.settings.interval) + minimal[0].graph.settings.interval);
+    expect(minimal[0].graph.end - 0).toEqual(minimal[0].graph.end - (minimal[0].graph.end % minimal[0].graph.settings.interval));
     expect(minimal[0].graph.start - 0).toEqual(minimal[0].graph.end - minimal[0].graph.settings.timespan);
   });
 
   it("should set the graph start/end times for rolling graphs", function() {
     rolling_graph.pachubeGraph();
+    expect(rolling_graph[0].graph.end - 0).toEqual(rolling_graph[0].graph.end - (rolling_graph[0].graph.end % rolling_graph[0].graph.settings.polling_interval));
     expect(rolling_graph[0].graph.start - 0).toEqual(rolling_graph[0].graph.end - rolling_graph[0].graph.settings.timespan);
   });
 
@@ -205,5 +205,26 @@ describe("PachubeGraph", function() {
     runs(function() {
       expect(minimal[0].graph.draw).toHaveBeenCalled();
     });
+  });
+
+  it("'draw' should replace the html in .pachube-graph", function() {
+    minimal.pachubeGraph();
+    spyOn(minimal[0].graph.element, 'html');
+    minimal[0].graph.draw();
+    expect(minimal[0].graph.element.html).toHaveBeenCalledWith(minimal[0].graph.canvas);
+  });
+
+  it("'draw' should call $.plot", function() {
+    minimal.pachubeGraph();
+    spyOn($, 'plot');
+    minimal[0].graph.draw();
+    expect($.plot).toHaveBeenCalledWith( minimal[0].graph.canvas
+                                       , [minimal[0].graph.data]
+                                       , { xaxis: { mode: "time"
+                                                  , min: minimal[0].graph.start
+                                                  , max: minimal[0].graph.end
+                                                  }
+                                         }
+                                       );
   });
 });
