@@ -151,76 +151,80 @@ describe("PachubeGraph", function() {
     expect(minimal[0].graph.update).not.toEqual(undefined);
   });
 
+  describe("update", function() {
+    it("should push the received datapoints into data", function() {
+      minimal.pachubeGraph();
+
+      runs(function() {
+        minimal[0].graph.update();
+      });
+
+      waits(500);
+
+      expect(minimal[0].graph.data).toEqual(graph_data);
+    });
+
+    it("should only request new data", function() {
+      minimal.pachubeGraph();
+      var start, end;
+
+      minimal[0].graph.update(function(results) {
+        start = results.start;
+        end = results.end;
+      });
+
+      expect(minimal[0].graph.data).toEqual(graph_data);
+
+      minimal[0].graph.update(function(results) {
+        expect(results.start >= data[3].at);
+        expect(results.end).toBeGreaterThan(results.start);
+      });
+    });
+
+    it("should not store duplicate data", function() {
+      minimal.pachubeGraph();
+      minimal[0].graph.update();
+      expect(minimal[0].graph.data).toEqual(graph_data);
+    });
+
+    it("should call 'draw'", function() {
+      minimal.pachubeGraph();
+
+      spyOn(minimal[0].graph, 'draw');
+
+      runs(function() {
+        minimal[0].graph.update();
+      });
+
+      waits(500);
+
+      runs(function() {
+        expect(minimal[0].graph.draw).toHaveBeenCalled();
+      });
+    });
+  });
+
   it("should have a 'draw' method", function() {
     minimal.pachubeGraph();
     expect(minimal[0].graph.draw).not.toEqual(undefined);
   });
 
-  it("'update' should push the received datapoints into data", function() {
-    minimal.pachubeGraph();
-
-    runs(function() {
-      minimal[0].graph.update();
+  describe("draw", function() {
+    it("should replace the html in .pachube-graph", function() {
+      minimal.pachubeGraph();
+      expect(minimal[0].graph.canvas).not.toEqual(undefined);
     });
 
-    waits(500);
-
-    expect(minimal[0].graph.data).toEqual(graph_data);
-  });
-
-  it("'update' should only request new data", function() {
-    minimal.pachubeGraph();
-    var start, end;
-
-    minimal[0].graph.update(function(results) {
-      start = results.start;
-      end = results.end;
+    it("should add a link bar to the top of the graph", function() {
+      minimal.pachubeGraph();
+      expect(minimal[0].graph.link_bar).not.toEqual(undefined);
     });
 
-    expect(minimal[0].graph.data).toEqual(graph_data);
-
-    minimal[0].graph.update(function(results) {
-      expect(results.start >= data[3].at);
-      expect(results.end).toBeGreaterThan(results.start);
+    it("should call $.plot", function() {
+      minimal.pachubeGraph();
+      spyOn($, 'plot');
+      minimal[0].graph.draw();
+      expect($.plot).toHaveBeenCalled();
     });
-  });
-
-  it("'update' should not store duplicate data", function() {
-    minimal.pachubeGraph();
-    minimal[0].graph.update();
-    expect(minimal[0].graph.data).toEqual(graph_data);
-  });
-
-  it("'update' should call 'draw'", function() {
-    minimal.pachubeGraph();
-
-    spyOn(minimal[0].graph, 'draw');
-
-    runs(function() {
-      minimal[0].graph.update();
-    });
-
-    waits(500);
-
-    runs(function() {
-      expect(minimal[0].graph.draw).toHaveBeenCalled();
-    });
-  });
-
-  it("'draw' should replace the html in .pachube-graph", function() {
-    minimal.pachubeGraph();
-    expect(minimal[0].graph.canvas).not.toEqual(undefined);
-  });
-
-  it("'draw' should add a link bar to the top of the graph", function() {
-    minimal.pachubeGraph();
-    expect(minimal[0].graph.link_bar).not.toEqual(undefined);
-  });
-
-  it("'draw' should call $.plot", function() {
-    minimal.pachubeGraph();
-    spyOn($, 'plot');
-    minimal[0].graph.draw();
-    expect($.plot).toHaveBeenCalled();
   });
 });
