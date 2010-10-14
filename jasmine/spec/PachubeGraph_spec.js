@@ -4,6 +4,8 @@ describe("PachubeGraph", function() {
   var twenty_four_hours;
   var four_days;
   var three_months;
+  var options_graph;
+  var rolling_graph;
   var data;
   var graph_data;
   var now = "2010-10-13T14:10:55.747Z";
@@ -14,12 +16,16 @@ describe("PachubeGraph", function() {
                  'fixtures/last_hour.html',
                  'fixtures/twenty_four_hours.html',
                  'fixtures/four_days.html',
-                 'fixtures/three_months.html');
+                 'fixtures/three_months.html',
+                 'fixtures/options_graph.html',
+                 'fixtures/rolling_graph.html');
     minimal = $('#minimal.pachube-graph');
     last_hour = $('#last_hour.pachube-graph');
     twenty_four_hours = $('#twenty_four_hours.pachube-graph');
     four_days = $('#four_days.pachube-graph');
     three_months = $('#three_months.pachube-graph');
+    options_graph = $('#options_graph.pachube-graph');
+    rolling_graph = $('#rolling_graph.pachube-graph');
 
     data = 
       [ {at: "2010-10-13T14:10:51.747789Z", value: "1309"}
@@ -100,6 +106,24 @@ describe("PachubeGraph", function() {
     three_months.pachubeGraph();
     expect(three_months[0].graph.settings.timespan).toEqual(7776000000);
     expect(three_months[0].graph.settings.interval).toEqual(86400);
+  });
+
+  it("should parse the pachube-options parameter", function() {
+    options_graph.pachubeGraph();
+    expect(options_graph[0].graph.settings.rolling).toEqual(true);
+    expect(options_graph[0].graph.settings.update).toEqual(true);
+    expect(options_graph[0].graph.settings.timespan).toEqual(86400000);
+  });
+
+  it("should set the graph start/end times for static graphs", function() {
+    minimal.pachubeGraph();
+    expect(minimal[0].graph.end - 0).toEqual((minimal[0].graph.end % minimal[0].graph.settings.interval) + minimal[0].graph.settings.interval);
+    expect(minimal[0].graph.start - 0).toEqual(minimal[0].graph.end - minimal[0].graph.settings.timespan);
+  });
+
+  it("should set the graph start/end times for rolling graphs", function() {
+    rolling_graph.pachubeGraph();
+    expect(rolling_graph[0].graph.start - 0).toEqual(rolling_graph[0].graph.end - rolling_graph[0].graph.settings.timespan);
   });
 
   it("should have a 'data' parameter for storing fetched data", function() {

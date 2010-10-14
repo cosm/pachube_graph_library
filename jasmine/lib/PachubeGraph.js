@@ -13,12 +13,12 @@ function PachubeGraph(element) {
     self.settings = {
       resource: self.element.attr('pachube-resource')
     , api_key: self.element.attr('pachube-key')
-    , rolling: false
-    , update: false
     , per_page: 2000
     };
 
-    self.set_timespan_and_interval();
+    self.parse_pachube_options();
+
+    self.set_start_and_end();
 
     // Where we will store fetched data
     self.data = new Array();
@@ -26,8 +26,24 @@ function PachubeGraph(element) {
     self.update();
   };
 
-  self.set_timespan_and_interval = function() {
-    switch(self.element.attr('timespan')) {
+  self.parse_pachube_options = function() {
+    var options = self.element.attr('pachube-options');
+    if (options == undefined) { options = ""; }
+    options_hash = new Array();
+
+    re = /([^:]*):([^;]*);/;
+    while (match = options.match(re)) {
+      options = options.replace(re, '');
+      options_hash[match[1].trim()] = match[2].trim();
+    }
+
+    self.set_timespan_and_interval(options_hash["timespan"] || "");
+    self.settings.rolling = (options_hash["rolling"] == "true");
+    self.settings.update = (options_hash["update"] == "true");
+  };
+
+  self.set_timespan_and_interval = function(str) {
+    switch(str) {
       case "3 months":
         self.settings.timespan = 7776000000;
         self.settings.interval = 86400;
@@ -46,6 +62,15 @@ function PachubeGraph(element) {
         self.settings.interval = 900;
         break;
     }
+  };
+
+  self.set_start_and_end = function() {
+    if (self.settings.rolling) {
+      self.end = new Date();
+    } else {
+      self.end = ((new Date() % self.settings.interval) + self.settings.interval);
+    }
+    self.start = new Date(self.end - self.settings.timespan);
   };
 
   // Returns the last received datapoint time (or 0)
@@ -82,10 +107,7 @@ function PachubeGraph(element) {
           }
         }
 
-        self.draw({
-          start: end - self.settings.timespan
-        , end: end
-        });
+        self.draw();
 
         if (callback != undefined) {
           callback(result);
@@ -95,8 +117,7 @@ function PachubeGraph(element) {
   };
 
   // (Re)draws the graph from self.data
-  self.draw = function(options) {
-    
+  self.draw = function() {
   };
 
   self.init(element);
