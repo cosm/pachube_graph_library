@@ -116,7 +116,7 @@ describe("PachubeGraph", function() {
 
   it("should set the graph start/end times for static graphs", function() {
     minimal.pachubeGraph();
-    expect(minimal[0].graph.end - 0).toEqual(minimal[0].graph.end - (minimal[0].graph.end % minimal[0].graph.settings.interval));
+    expect(minimal[0].graph.end - 0).toEqual(minimal[0].graph.end - (minimal[0].graph.end % minimal[0].graph.settings.timespan));
     expect(minimal[0].graph.start - 0).toEqual(minimal[0].graph.end - minimal[0].graph.settings.timespan);
   });
 
