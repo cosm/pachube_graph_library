@@ -5,7 +5,7 @@ describe("PachubeGraph", function() {
   var four_days;
   var three_months;
   var data;
-  var graph_data = [];
+  var graph_data;
   var now = "2010-10-13T14:10:55.747Z";
   var oldAjax = $.ajax;
 
@@ -38,28 +38,10 @@ describe("PachubeGraph", function() {
     $.ajax = function(options) {
       if (options == undefined) { var options = {}; }
 
-      // Handle start and end params effectively
-      if (options.start != undefined) {
-        var new_data = [];
-        for(var i=0; i < data.length; i++) {
-          if (graph_data[i][0] > options.start) {
-            new_data.push(data[i]);
-          }
-        }
-        data = new_data;
-      }
-      if (options.end != undefined) {
-        var new_data = [];
-        for(var i=0; i < data.length; i++) {
-          if (graph_data[i][0] < options.end) {
-            new_data.push(data[i]);
-          }
-        }
-        data = new_data;
-      }
-
       var result = {
         datapoints: data
+      , start: options.url.match(/&start=([^&]*)/)[1]
+      , end: options.url.match(/&end=([^&]*)/)[1]
       };
 
       if (options.success != undefined) {
@@ -164,11 +146,18 @@ describe("PachubeGraph", function() {
 
   it("'update' should only request new data", function() {
     minimal.pachubeGraph();
+    var start, end;
+
+    minimal[0].graph.update(function(results) {
+      start = results.start;
+      end = results.end;
+    });
 
     expect(minimal[0].graph.data).toEqual(graph_data);
 
     minimal[0].graph.update(function(results) {
-      expect(results.datapoints).toEqual([]);
+      expect(results.start >= data[3].at);
+      expect(results.end).toBeGreaterThan(results.start);
     });
   });
 

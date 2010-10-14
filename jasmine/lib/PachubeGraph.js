@@ -24,7 +24,7 @@ function PachubeGraph(element) {
     self.data = new Array();
 
     self.update();
-  }
+  };
 
   self.set_timespan_and_interval = function() {
     switch(self.element.attr('timespan')) {
@@ -46,12 +46,25 @@ function PachubeGraph(element) {
         self.settings.interval = 900;
         break;
     }
-  }
+  };
+
+  // Returns the last received datapoint time (or 0)
+  self.last_received_at = function() {
+    var length = self.data.length;
+    if (length < 1) { return 0; }
+
+    return self.data[length - 1][0];
+  };
 
   // Fetches the data needed and calls draw
   self.update = function(callback) {
     var end = new Date();
-    var start = new Date(end - self.settings.interval);
+    var start = new Date(end - self.settings.timespan);
+
+    var last_received_at = self.last_received_at();
+    if (last_received_at > start) {
+      start = new Date(last_received_at);
+    }
 
     PachubeAPI().datastreamGet({
       resource: self.settings.resource
@@ -61,30 +74,30 @@ function PachubeGraph(element) {
     , interval: self.settings.interval
     , per_page: 2000
     , callback: function(result) {
-        var last_received = 0;
-        if (self.data.length > 0) {
-          last_received = self.data[self.data.length - 1][0]
-        }
         for (var i=0; i < result.datapoints.length; i++) {
           var point = result.datapoints[i];
-          //point.at = Date.parse(point.at.substring(0,23) + "Z");
-          if (point.at > last_received) {
-            self.data.push([point.at, parseFloat(point.value)]);
+          point_at = Date.parse(point.at.substring(0,23) + "Z");
+          if (point_at > last_received_at) {
+            self.data.push([point_at, parseFloat(point.value)]);
           }
         }
-        self.draw();
+
+        self.draw({
+          start: end - self.settings.timespan
+        , end: end
+        });
 
         if (callback != undefined) {
           callback(result);
         }
       }
     });
-  }
+  };
 
   // (Re)draws the graph from self.data
-  self.draw = function() {
+  self.draw = function(options) {
     
-  }
+  };
 
   self.init(element);
 }
