@@ -19,12 +19,14 @@ function PachubeGraph(element) {
 
     self.parse_pachube_options();
 
-    self.set_start_and_end();
-
     // Where we will store fetched data
     self.data = new Array();
 
-    self.update();
+    if (self.settings.update) {
+      setInterval(self.update, self.settings.polling_interval);
+    } else {
+      self.update();
+    }
   };
 
   self.parse_pachube_options = function() {
@@ -85,19 +87,19 @@ function PachubeGraph(element) {
 
   // Fetches the data needed and calls draw
   self.update = function(callback) {
-    var end = new Date();
-    var start = new Date(end - self.settings.timespan);
+    self.set_start_and_end();
+    var fetch_from = self.start;
 
     var last_received_at = self.last_received_at();
-    if (last_received_at > start) {
-      start = new Date(last_received_at);
+    if (last_received_at > fetch_from) {
+      fetch_from = new Date(last_received_at);
     }
 
     PachubeAPI().datastreamGet({
       resource: self.settings.resource
     , api_key: self.settings.api_key
-    , start: start
-    , end: end
+    , start: fetch_from
+    , end: self.end
     , interval: self.settings.interval
     , per_page: 2000
     , callback: function(result) {
@@ -118,6 +120,18 @@ function PachubeGraph(element) {
     });
   };
 
+  var timespan_link = function(value) {
+    var link = document.createElement('a');
+    link.href = '#' + value;
+    link.innerText = value;
+    link.onclick = function() {
+      self.set_timespan_and_interval(value);
+      self.data = []; // get rid of the data we already got
+      self.update();
+    };
+    return link;
+  }
+
   // (Re)draws the graph from self.data
   self.draw = function() {
     if (self.canvas == undefined) {
@@ -134,8 +148,15 @@ function PachubeGraph(element) {
       var link_bar = document.createElement('div');
       link_bar.className = 'pachube-graph-link-bar';
       link_bar.align = 'right';
+      link_bar.appendChild(timespan_link("3 months"));
+      link_bar.appendChild(document.createTextNode(' | '));
+      link_bar.appendChild(timespan_link("4 days"));
+      link_bar.appendChild(document.createTextNode(' | '));
+      link_bar.appendChild(timespan_link("24 hours"));
+      link_bar.appendChild(document.createTextNode(' | '));
+      link_bar.appendChild(timespan_link("last hour"));
       self.element.prepend(link_bar);
-      self.link_bar = $(self.element).children(link_bar);
+      self.link_bar = $(self.element).children('.pachube-graph-link-bar');
     }
 
     $.plot( self.canvas

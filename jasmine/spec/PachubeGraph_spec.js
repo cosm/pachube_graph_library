@@ -151,6 +151,12 @@ describe("PachubeGraph", function() {
     expect(minimal[0].graph.update).not.toEqual(undefined);
   });
 
+  it("should do 'update' in a setInterval, if we have enabled update", function() {
+    spyOn(window, 'setInterval');
+    options_graph.pachubeGraph();
+    expect(window.setInterval).toHaveBeenCalledWith(options_graph[0].graph.update, options_graph[0].graph.settings.polling_interval);
+  });
+
   describe("update", function() {
     it("should push the received datapoints into data", function() {
       minimal.pachubeGraph();
@@ -210,7 +216,7 @@ describe("PachubeGraph", function() {
   });
 
   describe("draw", function() {
-    it("should replace the html in .pachube-graph", function() {
+    it("should add a canvas to the graph div", function() {
       minimal.pachubeGraph();
       expect(minimal[0].graph.canvas).not.toEqual(undefined);
     });
@@ -218,6 +224,11 @@ describe("PachubeGraph", function() {
     it("should add a link bar to the top of the graph", function() {
       minimal.pachubeGraph();
       expect(minimal[0].graph.link_bar).not.toEqual(undefined);
+    });
+
+    it("should actually have links in the link bar", function() {
+      minimal.pachubeGraph();
+      expect(minimal[0].graph.link_bar).toContain('a');
     });
 
     it("should call $.plot", function() {
