@@ -68,10 +68,9 @@ function PachubeGraph(element) {
   self.set_start_and_end = function() {
     var d = new Date();
     if (self.settings.rolling) {
-      self.end = d - (d % self.settings.polling_interval);
+      self.end = new Date(d - (d % self.settings.polling_interval));
     } else {
-      var d = new Date();
-      self.end = d - (d % self.settings.interval) + self.settings.interval;
+      self.end = new Date(d - (d % self.settings.interval) + self.settings.interval);
     }
     self.start = new Date(self.end - self.settings.timespan);
   };
@@ -121,12 +120,23 @@ function PachubeGraph(element) {
 
   // (Re)draws the graph from self.data
   self.draw = function() {
-    self.canvas = self.element.clone();
-    self.canvas.removeClass = 'pachube-graph';
-    self.canvas.addClass = 'pachube-graph-canvas';
-    self.canvas.height = self.element.height();
-    self.canvas.width = self.element.width();
-    self.element.html(self.canvas); // Replace existing content
+    if (self.canvas == undefined) {
+      var canvas = self.element.clone();
+      canvas.removeClass('pachube-graph');
+      canvas.addClass('pachube-graph-canvas');
+      canvas.height = self.element.height();
+      canvas.width = self.element.width();
+      self.element.html(canvas); // Replace existing content
+      self.canvas = $(self.element).children(canvas);
+    }
+
+    if (self.link_bar == undefined) {
+      var link_bar = document.createElement('div');
+      link_bar.className = 'pachube-graph-link-bar';
+      link_bar.align = 'right';
+      self.element.prepend(link_bar);
+      self.link_bar = $(self.element).children(link_bar);
+    }
 
     $.plot( self.canvas
           , [self.data]

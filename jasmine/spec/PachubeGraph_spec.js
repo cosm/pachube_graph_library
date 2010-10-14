@@ -209,22 +209,18 @@ describe("PachubeGraph", function() {
 
   it("'draw' should replace the html in .pachube-graph", function() {
     minimal.pachubeGraph();
-    spyOn(minimal[0].graph.element, 'html');
-    minimal[0].graph.draw();
-    expect(minimal[0].graph.element.html).toHaveBeenCalledWith(minimal[0].graph.canvas);
+    expect(minimal[0].graph.canvas).not.toEqual(undefined);
+  });
+
+  it("'draw' should add a link bar to the top of the graph", function() {
+    minimal.pachubeGraph();
+    expect(minimal[0].graph.link_bar).not.toEqual(undefined);
   });
 
   it("'draw' should call $.plot", function() {
     minimal.pachubeGraph();
     spyOn($, 'plot');
     minimal[0].graph.draw();
-    expect($.plot).toHaveBeenCalledWith( minimal[0].graph.canvas
-                                       , [minimal[0].graph.data]
-                                       , { xaxis: { mode: "time"
-                                                  , min: minimal[0].graph.start
-                                                  , max: minimal[0].graph.end
-                                                  }
-                                         }
-                                       );
+    expect($.plot).toHaveBeenCalled();
   });
 });
