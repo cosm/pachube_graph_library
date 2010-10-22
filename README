@@ -28,3 +28,13 @@ Options:
 
     update: true;         Automatically updates the graph with
                           new data every 5 minutes.
+
+    background-color: #ffffff   Sets the background color for the graph
+
+    line-color: #ff0066;        Sets the color of the line
+
+    grid-color: #efefef;        Sets the color of the grid behind the line
+
+    border-color: #9d9d9d;      Sets the color of the border around the graph
+
+    text-color: #555555;        Sets the color of the text and labels around the graph
