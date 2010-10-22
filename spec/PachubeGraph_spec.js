@@ -258,12 +258,41 @@ describe("PachubeGraph", function() {
       spyOn($, 'plot');
       minimal[0].graph.draw();
       expect($.plot).toHaveBeenCalledWith( minimal[0].graph.canvas
-                                         , [minimal[0].graph.data]
+                                         , [ { color: "#ff0066"
+                                             , data: minimal[0].graph.data
+                                             }
+                                           ]
                                          , { xaxis: { mode: "time"
                                                     , min: minimal[0].graph.start
                                                     , max: minimal[0].graph.end
                                                     }
-                                           , grid:  { backgroundColor: { colors: ["#fff", "#fff"] } }
+                                           , grid:  { color: "#555"
+                                                    , tickColor: "#efefef"
+                                                    , backgroundColor: "#fff"
+                                                    , borderColor: "#9d9d9d"
+                                                    }
+                                           }
+                                         );
+    });
+
+    it("should pass some chosen colors to flot", function() {
+      colors_graph.pachubeGraph();
+      spyOn($, 'plot');
+      colors_graph[0].graph.draw();
+      expect($.plot).toHaveBeenCalledWith( colors_graph[0].graph.canvas
+                                         , [ { color: "#FFFFFF"
+                                             , data: colors_graph[0].graph.data
+                                             }
+                                           ]
+                                         , { xaxis: { mode: "time"
+                                                    , min: colors_graph[0].graph.start
+                                                    , max: colors_graph[0].graph.end
+                                                    }
+                                           , grid:  { color: "#FFFFFF"
+                                                    , tickColor: "#000000"
+                                                    , backgroundColor: "#555555"
+                                                    , borderColor: "#0000FF"
+                                                    }
                                            }
                                          );
     });

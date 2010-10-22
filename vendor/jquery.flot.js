@@ -38,8 +38,7 @@
         var series = [],
             options = {
                 // the color theme used for graphs
-                //colors: ["#edc240", "#afd8f8", "#cb4b4b", "#4da74d", "#9440ed"],
-                colors: ["#ff0066", "#afd8f8", "#cb4b4b", "#4da74d", "#9440ed"], // Pachube-Pink
+                colors: ["#edc240", "#afd8f8", "#cb4b4b", "#4da74d", "#9440ed"],
                 legend: {
                     show: true,
                     noColumns: 1, // number of colums in legend table
