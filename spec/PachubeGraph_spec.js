@@ -1,14 +1,15 @@
 describe("PachubeGraph", function() {
-  var minimal;
-  var last_hour;
-  var twenty_four_hours;
-  var four_days;
-  var three_months;
-  var options_graph;
-  var rolling_graph;
-  var data;
-  var graph_data;
-  var oldAjax = $.ajax;
+  var minimal
+    , last_hour
+    , twenty_four_hours
+    , four_days
+    , three_months
+    , options_graph
+    , rolling_graph
+    , colors_graph
+    , data
+    , graph_data
+    , oldAjax = $.ajax;
 
   beforeEach(function() {
     loadFixtures('fixtures/minimal_graph.html',
@@ -17,7 +18,8 @@ describe("PachubeGraph", function() {
                  'fixtures/four_days.html',
                  'fixtures/three_months.html',
                  'fixtures/options_graph.html',
-                 'fixtures/rolling_graph.html');
+                 'fixtures/rolling_graph.html',
+                 'fixtures/colors_graph.html');
     minimal = $('#minimal.pachube-graph');
     last_hour = $('#last_hour.pachube-graph');
     twenty_four_hours = $('#twenty_four_hours.pachube-graph');
@@ -25,6 +27,7 @@ describe("PachubeGraph", function() {
     three_months = $('#three_months.pachube-graph');
     options_graph = $('#options_graph.pachube-graph');
     rolling_graph = $('#rolling_graph.pachube-graph');
+    colors_graph = $('#colors_graph.pachube-graph');
 
     data = 
       [ {at: "2010-10-13T14:10:51.747789Z", value: "1309"}
@@ -236,6 +239,33 @@ describe("PachubeGraph", function() {
       spyOn($, 'plot');
       minimal[0].graph.draw();
       expect($.plot).toHaveBeenCalled();
+    });
+
+    it("should add the pachube logo", function() {
+      minimal.pachubeGraph();
+      expect(minimal[0].graph.logo).not.toEqual(undefined);
+    });
+
+    it("should actually have a logo in the logo div", function() {
+      minimal.pachubeGraph();
+      expect(minimal[0].graph.logo).toContain('a');
+    });
+  });
+
+  describe("colors", function() {
+    it("should pass some default colors to flot", function() {
+      minimal.pachubeGraph();
+      spyOn($, 'plot');
+      minimal[0].graph.draw();
+      expect($.plot).toHaveBeenCalledWith( minimal[0].graph.canvas
+                                         , [minimal[0].graph.data]
+                                         , { xaxis: { mode: "time"
+                                                    , min: minimal[0].graph.start
+                                                    , max: minimal[0].graph.end
+                                                    }
+                                           , grid:  { backgroundColor: { colors: ["#fff", "#fff"] } }
+                                           }
+                                         );
     });
   });
 });
