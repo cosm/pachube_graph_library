@@ -11,7 +11,7 @@ Usage:
 
     <body>
       <!-- For each graph you want, include: -->
-      <div id="graph" class="pachube-graph" pachube-resource="feeds/FEED_ID/datastreams/DATASTREAM_ID" pachube-key="API_KEY" pachube-options="OPTIONS" style="width:WIDTH; height:HEIGHT;">&nbsp;</div>
+      <div id="graph" class="pachube-graph" pachube-resource="/feeds/FEED_ID/datastreams/DATASTREAM_ID" pachube-key="API_KEY" pachube-options="OPTIONS" style="width:WIDTH; height:HEIGHT;">&nbsp;</div>
     </body>
 
 Options:
