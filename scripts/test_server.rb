@@ -63,5 +63,5 @@ __END__
     %title Viewing Environment #{params['id']}
     %script{:src => "/lib/PachubeLoader.js"}
   %body>
-    #graph.pachube-graph{"pachube-resource" => "feeds/#{params['id']}/datastreams/#{params['stream_id']}", "pachube-key" => "#{params['key']}", "pachube-options" => "#{params['rolling'] ? "rolling: true;" : ""}#{params['update'] ? "update: true;" : ""}", :style => "width:#{params['width']}px;height:#{params['height']}px;background:#EEE;"}
+    #graph.pachube-graph{"pachube-resource" => "/feeds/#{params['id']}/datastreams/#{params['stream_id']}", "pachube-key" => "#{params['key']}", "pachube-options" => "#{params['rolling'] ? "rolling: true;" : ""}#{params['update'] ? "update: true;" : ""}", :style => "width:#{params['width']}px;height:#{params['height']}px;background:#EEE;"}
       Graph #{params['id']}
