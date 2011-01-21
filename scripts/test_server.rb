@@ -47,6 +47,13 @@ __END__
             %label Update:
             %input{:type => "checkbox", :name => "update", :value => "true"}
           %li
+            %label Default Timespan:
+            %select{:name => "timespan"}
+              %option{:value => "last hour"} last hour
+              %option{:value => "24 hours", :selected => true} 24 hours
+              %option{:value => "4 days"} 4 days
+              %option{:value => "3 months"} 3 months
+          %li
             %label Size:
             %input{:type => "text", :name => "width", :value => "640"}
             px X 
@@ -63,5 +70,5 @@ __END__
     %title Viewing Environment #{params['id']}
     %script{:src => "/lib/PachubeLoader.js"}
   %body>
-    #graph.pachube-graph{"pachube-resource" => "/feeds/#{params['id']}/datastreams/#{params['stream_id']}", "pachube-key" => "#{params['key']}", "pachube-options" => "#{params['rolling'] ? "rolling: true;" : ""}#{params['update'] ? "update: true;" : ""}", :style => "width:#{params['width']}px;height:#{params['height']}px;background:#EEE;"}
+    #graph.pachube-graph{"pachube-resource" => "/feeds/#{params['id']}/datastreams/#{params['stream_id']}", "pachube-key" => "#{params['key']}", "pachube-options" => "#{params['rolling'] ? "rolling: true;" : ""}#{params['update'] ? "update: true;" : ""}#{params['timespan'] ? "timespan:#{params['timespan']};" : ""}", :style => "width:#{params['width']}px;height:#{params['height']}px;background:#EEE;"}
       Graph #{params['id']}
