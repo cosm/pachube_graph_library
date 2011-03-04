@@ -1,0 +1,30 @@
+/*
+body {
+  font-family: sans-serif;
+}
+
+*/
+
+fieldset {
+  border-width: 0;
+  border-top: 1px solid #9E9E9E;
+  padding:0;
+}
+
+h2 {
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+
+.label {
+  text-align: right;
+}
+
+.notes {
+  font-size: 75%;
+  color: white;
+}
+
+:focus + .notes, :hover + .notes {
+  color: #111;
+}
