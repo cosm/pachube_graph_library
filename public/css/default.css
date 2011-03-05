@@ -1,9 +1,7 @@
-/*
 body {
-  font-family: sans-serif;
+  padding-top: 2em;
+  padding-bottom: 6em;
 }
-
-*/
 
 fieldset {
   border-width: 0;
@@ -21,6 +19,7 @@ h2 {
 }
 
 .notes {
+  line-height: 1.33333em;
   font-size: 75%;
   color: white;
 }

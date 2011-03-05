@@ -22,7 +22,7 @@ $(function() {
       }
     }
 
-    var graph_html = '<div id="graph" class="pachube-graph" pachube-resource="/feeds/' + values.id + '/datastreams/' + values.stream_id + '" pachube-key="' + values.key + '" pachube-options="' + optionString+ '" style="width:' + values.width +'px;height:'+ values.height + 'px;background:' + values.background +';">'
+    var graph_html = '<div id="graph" class="pachube-graph" pachube-resource="/feeds/' + values.id + '/datastreams/' + values.stream_id + '" pachube-key="' + values.key + '" pachube-options="' + optionString+ '" style="width:' + values.width +';height:'+ values.height + ';background:' + values.background +';">'
     + 'Graph: Feed ' + values.id + ', Datastream ' + values.stream_id
     + '</div>';
 
