@@ -11,7 +11,7 @@ $(function() {
     values.height = values.height || '240px';
     values.background = values.background || '#F0F0F0';
     var head_html = '<script type="text/javascript" src="http://paulbellamy.com/pachube_graph_library/lib/PachubeLoader.js"></script>';
-    var options = { "timespan": values['timespan']
+    var options = { "timespan": unescape(values['timespan'])
                   , "rolling":  values['rolling'] == 'on'
                   , "update":   values['update'] == 'on'
                   , "background-color":  values['background-color'] || "#FFFFFF"
