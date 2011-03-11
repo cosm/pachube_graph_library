@@ -9,10 +9,18 @@ fieldset {
   padding:0;
 }
 
-h2 {
+h1, h2 {
   padding-left: 0.5em;
   padding-right: 0.5em;
   display: inline;
+}
+
+div#header div#logo {
+  padding-bottom: 2em;
+}
+
+div#header div#beta {
+  text-align: right;
 }
 
 .label {
