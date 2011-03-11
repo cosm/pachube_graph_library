@@ -63,7 +63,7 @@
               <label>Rolling:</label> 
             </div> 
             <div class='input span-4'> 
-              <input checked name='rolling' type='checkbox'> 
+              <input name='rolling' type='checkbox'> 
             </div> 
             <div class='notes span-4 last'> 
               ← Should this graph finish "now"?  If selected the right-edge of this graph will be the time when it was loaded.
@@ -204,11 +204,15 @@
       </form> 
       <div class='span-12 last'> 
         <h2>Live Preview</h2> 
+        <span id="link">
+          <a href="">link</a>
+        </span>
         <pre><code id='result'></code></pre> 
         <br> 
-        <h2>Embeddable HTML
-        <span id="clippy">
-        </span>
+        <h2>
+          Embeddable HTML
+          <span id="clippy">
+          </span>
         </h2>
         <pre><code id='embeddable_code'></code></pre> 
       </div> 

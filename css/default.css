@@ -12,6 +12,7 @@ fieldset {
 h2 {
   padding-left: 0.5em;
   padding-right: 0.5em;
+  display: inline;
 }
 
 .label {
