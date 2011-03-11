@@ -10,10 +10,10 @@ $(function() {
     values.width = values.width || '420px';
     values.height = values.height || '240px';
     values.background = values.background || '#F0F0F0';
-    var head_html = '<script type="text/javascript" src="lib/PachubeLoader.js"></script>';
+    var head_html = '<script type="text/javascript" src="http://paulbellamy.com/pachube_graph_library/lib/PachubeLoader.js"></script>';
     var options = { "timespan": values['timespan']
-                  , "rolling":  values['rolling']
-                  , "update":   values['update']
+                  , "rolling":  values['rolling'] == 'on'
+                  , "update":   values['update'] == 'on'
                   , "background-color":  values['background-color'] || "#FFFFFF"
                   , "line-color":        values['line-color'] || "#FF0066"
                   , "grid-color":        values['grid-color'] || "#EFEFEF"
@@ -36,6 +36,7 @@ $(function() {
 
     $('#result').html(result);
     $('#embeddable_code').text(result);
+    $('embed[name=clippy]');
   }
 
   $('#ourForm :input').bind('change', function(evt) {
@@ -44,4 +45,6 @@ $(function() {
   });
 
   $('form').submit(function(evt) { return false; }); // So the form will not submit
+
+  submitForm();
 });
