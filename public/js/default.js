@@ -4,15 +4,21 @@ $(function() {
     $.each($('form').serializeArray(), function(i, field) {
       values[field.name] = field.value;
     });
-    var head_html = '<script type="text/javascript" src="http://www.pachube.com/widgets/PachubeLoader.js"></script>';
+    values.id = values.id || "504";
+    values.stream_id = values.stream_id || "1";
+    values.key = values.key || '1iObDqRLQTi6Z3L-Gf7rKBJfSfSvrwFsmE83KrpYtCY';
+    values.width = values.width || '420px';
+    values.height = values.height || '240px';
+    values.background = values.background || '#FFFFFF';
+    var head_html = '<script type="text/javascript" src="//www.pachube.com/widgets/PachubeLoader.js"></script>';
     var options = { "timespan": values['timespan']
                   , "rolling":  values['rolling']
                   , "update":   values['update']
-                  , "background-color":  values['background-color']
-                  , "line-color":        values['line-color']
-                  , "grid-color":        values['grid-color']
-                  , "border-color":      values['border-color']
-                  , "text-color":        values['text-color']
+                  , "background-color":  values['background-color'] || "#FFFFFF"
+                  , "line-color":        values['line-color'] || "#FF0066"
+                  , "grid-color":        values['grid-color'] || "#EFEFEF"
+                  , "border-color":      values['border-color'] || "#9D9D9D"
+                  , "text-color":        values['text-color'] || "#555555"
                   };
 
     var optionString = ""
