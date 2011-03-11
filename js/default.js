@@ -68,7 +68,10 @@ $(function() {
     return false;
   });
 
-  $('form').submit(function(evt) { return false; }); // So the form will not submit
+  $('#ourForm').submit(function(evt) {
+    submitForm(evt);
+    return false;
+  });
 
   submitForm();
 });
