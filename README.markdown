@@ -6,14 +6,8 @@ Usage
 
 In your page include:
 
-    <head>
-      <script src="http://www.pachube.com/widgets/PachubeLoader.js"></script>
-    </head>
-
-    <body>
-      <!-- For each graph you want, include: -->
-      <div id="graph" class="pachube-graph" pachube-resource="/feeds/FEED_ID/datastreams/DATASTREAM_ID" pachube-key="API_KEY" pachube-options="OPTIONS" style="width:WIDTH; height:HEIGHT;">&nbsp;</div>
-    </body>
+    <div id="graph" class="pachube-graph" pachube-resource="/feeds/FEED_ID/datastreams/DATASTREAM_ID" pachube-key="API_KEY" pachube-options="OPTIONS" style="width:WIDTH; height:HEIGHT;">&nbsp;</div>
+    <script src="http://paulbellamy.com/pachube_graph_library/lib/PachubeLoader.js"></script>
 
 
 Options
