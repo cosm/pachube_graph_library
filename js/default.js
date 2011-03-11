@@ -2,7 +2,7 @@ $(function() {
   function submitForm(evt) {
     var values = {};
     $.each($('form').serializeArray(), function(i, field) {
-      values[field.name] = field.value;
+      values[field.name] = escape(field.value);
     });
     values.id = values.id || "504";
     values.stream_id = values.stream_id || "1";
@@ -28,15 +28,39 @@ $(function() {
       }
     }
 
-    var graph_html = '<div id="graph" class="pachube-graph" pachube-resource="/feeds/' + values.id + '/datastreams/' + values.stream_id + '" pachube-key="' + values.key + '" pachube-options="' + optionString+ '" style="width:' + values.width +';height:'+ values.height + ';background:' + values.background +';">'
+    var graph_html = '<div id="graph" class="pachube-graph" pachube-resource="feeds/' + values.id + '/datastreams/' + values.stream_id + '" pachube-key="' + values.key + '" pachube-options="' + optionString+ '" style="width:' + values.width +';height:'+ values.height + ';background:' + values.background +';">'
     + 'Graph: Feed ' + values.id + ', Datastream ' + values.stream_id
     + '</div>';
 
     var result = graph_html + "\n" + head_html
+    var clippy_result = escape(result);
 
     $('#result').html(result);
     $('#embeddable_code').text(result);
-    $('embed[name=clippy]');
+    $('#clippy').html(
+         '<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"'
+        +'       width="110"'
+        +'       height="14"'
+        +'       id="clippy" >'
+        +'  <param name="movie" value="flash/clippy.swf"/>'
+        +'  <param name="allowScriptAccess" value="always" />'
+        +'  <param name="quality" value="high" />'
+        +'  <param name="scale" value="noscale" />'
+        +'  <param name="FlashVars" value="text=' + clippy_result + '">'
+        +'  <param name="bgcolor" value="#FFFFFF">'
+        +'  <embed src="flash/clippy.swf"'
+        +'         width="110"'
+        +'         height="14"'
+        +'         name="clippy"'
+        +'         quality="high"'
+        +'         allowScriptAccess="always"'
+        +'         type="application/x-shockwave-flash"'
+        +'         pluginspage="http://www.macromedia.com/go/getflashplayer"'
+        +'         FlashVars="text=' + clippy_result + '"'
+        +'         bgcolor="#FFFFFF"'
+        +'  />'
+        +'</object>'
+        );
   }
 
   $('#ourForm :input').bind('change', function(evt) {
