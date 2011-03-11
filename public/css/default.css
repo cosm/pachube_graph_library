@@ -24,7 +24,7 @@ h2 {
   color: white;
 }
 
-:focus + .notes, :hover + .notes {
+.row:hover .notes {
   color: #111;
 }
 

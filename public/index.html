@@ -20,168 +20,198 @@
           <legend> 
             <h2>Data</h2> 
           </legend> 
-          <div class='label span-4'> 
-            <label>Feed ID:</label> 
-          </div> 
-          <div class='input span-4'> 
-            <input name='id' placeholder='504' type='text'> 
-          </div> 
-          <div class='notes span-4 last'> 
-            ← Which Pachube feed are we getting data from?
-          </div> 
-          <div class='label span-4'> 
-            <label>Datastream ID:</label> 
-          </div> 
-          <div class='input span-4'> 
-            <input name='stream_id' placeholder='1' type='text'> 
-          </div> 
-          <div class='notes span-4 last'> 
-            ← This is the datastream to graph.  It must contain numeric data.
-          </div> 
-          <div class='label span-4'> 
-            <label>API Key:</label> 
-          </div> 
-          <div class='input span-4'> 
-            <input name='key' type='text' placeholder='1iObDqRLQTi6Z3L-Gf7rKBJfSfSvrwFsmE83KrpYtCY'> 
-          </div> 
-          <div class='notes span-4 last'> 
-            ← This is the API Key used to set up this graph.  Because this will be publicly accessible, a great choice is to use a GET-only Secure Sharing Key.
-          </div> 
+          <div class="row">
+            <div class='label span-4'> 
+              <label>Feed ID:</label> 
+            </div> 
+            <div class='input span-4'> 
+              <input name='id' placeholder='504' type='text'> 
+            </div> 
+            <div class='notes span-4 last'> 
+              ← Which Pachube feed are we getting data from?
+            </div> 
+          </div>
+          <div class="row">
+            <div class='label span-4'> 
+              <label>Datastream ID:</label> 
+            </div> 
+            <div class='input span-4'> 
+              <input name='stream_id' placeholder='1' type='text'> 
+            </div> 
+            <div class='notes span-4 last'> 
+              ← This is the datastream to graph.  It must contain numeric data.
+            </div> 
+          </div>
+          <div class="row">
+            <div class='label span-4'> 
+              <label>API Key:</label> 
+            </div> 
+            <div class='input span-4'> 
+              <input name='key' type='text' placeholder='1iObDqRLQTi6Z3L-Gf7rKBJfSfSvrwFsmE83KrpYtCY'> 
+            </div> 
+            <div class='notes span-4 last'> 
+              ← This is the API Key used to set up this graph.  Because this will be publicly accessible, a great choice is to use a GET-only Secure Sharing Key.
+            </div> 
+          </div>
         </fieldset> 
         <fieldset> 
           <legend> 
             <h2>Graph Functionality</h2> 
           </legend> 
-          <div class='label span-4'> 
-            <label>Rolling:</label> 
-          </div> 
-          <div class='input span-4'> 
-            <input checked name='rolling' type='checkbox'> 
-          </div> 
-          <div class='notes span-4 last'> 
-            ← Should this graph finish "now"?  If selected the right-edge of this graph will be the time when it was loaded.
-          </div> 
-          <div class='label span-4'> 
-            <label>Auto-Update:</label> 
-          </div> 
-          <div class='input span-4'> 
-            <input name='update' type='checkbox'> 
-          </div> 
-          <div class='notes span-4 last'> 
-            ← Should this graph automatically update as new data is received?
-          </div> 
-          <div class='label span-4'> 
-            <label>Default Timespan:</label> 
-          </div> 
-          <div class='input span-4'> 
-            <select name='timespan'> 
-              <option value='last hour'>last hour</option> 
-              <option selected value='24 hours'>24 hours</option> 
-              <option value='4 days'>4 days</option> 
-              <option value='3 months'>3 months</option> 
-            </select> 
-          </div> 
-          <div class='notes span-4 last'> 
-            ← Which timespan should this graph default to?
-          </div> 
+          <div class="row">
+            <div class='label span-4'> 
+              <label>Rolling:</label> 
+            </div> 
+            <div class='input span-4'> 
+              <input checked name='rolling' type='checkbox'> 
+            </div> 
+            <div class='notes span-4 last'> 
+              ← Should this graph finish "now"?  If selected the right-edge of this graph will be the time when it was loaded.
+            </div> 
+          </div>
+          <div class="row">
+            <div class='label span-4'> 
+              <label>Auto-Update:</label> 
+            </div> 
+            <div class='input span-4'> 
+              <input name='update' type='checkbox'> 
+            </div> 
+            <div class='notes span-4 last'> 
+              ← Should this graph automatically update as new data is received?
+            </div> 
+          </div>
+          <div class="row">
+            <div class='label span-4'> 
+              <label>Default Timespan:</label> 
+            </div> 
+            <div class='input span-4'> 
+              <select name='timespan'> 
+                <option value='last hour'>last hour</option> 
+                <option selected value='24 hours'>24 hours</option> 
+                <option value='4 days'>4 days</option> 
+                <option value='3 months'>3 months</option> 
+              </select> 
+            </div> 
+            <div class='notes span-4 last'> 
+              ← Which timespan should this graph default to?
+            </div> 
+          </div>
         </fieldset> 
         <fieldset> 
           <legend> 
             <h2>Graph Appearance</h2> 
           </legend> 
-          <div class='label span-4'> 
-            <label>Width:</label> 
-          </div> 
-          <div class='input span-4'> 
-            <input name='width' size='10' type='text' placeholder='420px'> 
-          </div> 
-          <div class='notes span-4 last'> 
-            ← How wide should this graph be?
-          </div> 
-          <div class='label span-4'> 
-            <label>Height:</label> 
-          </div> 
-          <div class='input span-4'> 
-            <input name='height' size='10' type='text' placeholder='240px'> 
-          </div> 
-          <div class='notes span-4 last'> 
-            ← How tall should this graph be?
-          </div> 
-          <div class='label span-4'> 
-            <label>Background Color:</label> 
-          </div> 
-          <div class='input span-4'> 
-            <input name='background' size='10' type='text' placeholder='#FFFFFF'> 
-          </div> 
-          <div class='notes span-4 last'> 
-            ← What colour should the background of this graph be?
-          </div> 
-          <div class='label span-4'> 
-            <label>Grid Background Color:</label> 
-          </div> 
-          <div class='input span-4'> 
-            <input name='background-color' size='10' type='text' placeholder='#FFFFFF'> 
-          </div> 
-          <div class='notes span-4 last'> 
-            ← What colour should the grid background of this graph be?
-          </div> 
-          <div class='label span-4'> 
-            <label>Line Color:</label> 
-          </div> 
-          <div class='input span-4'> 
-            <input name='line-color' size='10' type='text' placeholder='#FF0066'> 
-          </div> 
-          <div class='notes span-4 last'> 
-            ← What colour should the line be?
-          </div> 
-          <div class='label span-4'> 
-            <label>Grid Color:</label> 
-          </div> 
-          <div class='input span-4'> 
-            <input name='grid-color' size='10' type='text' placeholder='#EFEFEF'> 
-          </div> 
-          <div class='notes span-4 last'> 
-            ← What colour should the grid be?
-          </div> 
-          <div class='label span-4'> 
-            <label>Border Color:</label> 
-          </div> 
-          <div class='input span-4'> 
-            <input name='border-color' size='10' type='text' placeholder='#9D9D9D'> 
-          </div> 
-          <div class='notes span-4 last'> 
-            ← What colour should the border around the graph be?
-          </div> 
-          <div class='label span-4'> 
-            <label>Text Color:</label> 
-          </div> 
-          <div class='input span-4'> 
-            <input name='text-color' size='10' type='text' placeholder='#555555'> 
-          </div> 
-          <div class='notes span-4 last'> 
-            ← What colour should the text on the graph be?
-          </div> 
+          <div class='row'>
+            <div class='label span-4'> 
+              <label>Width:</label> 
+            </div> 
+            <div class='input span-4'> 
+              <input name='width' size='10' type='text' placeholder='420px'> 
+            </div> 
+            <div class='notes span-4 last'> 
+              ← How wide should this graph be?
+            </div> 
+          </div>
+          <div class='row'>
+            <div class='label span-4'> 
+              <label>Height:</label> 
+            </div> 
+            <div class='input span-4'> 
+              <input name='height' size='10' type='text' placeholder='240px'> 
+            </div> 
+            <div class='notes span-4 last'> 
+              ← How tall should this graph be?
+            </div> 
+          </div>
+          <div class='row'>
+            <div class='label span-4'> 
+              <label>Background Color:</label> 
+            </div> 
+            <div class='input span-4'> 
+              <input name='background' size='10' type='text' placeholder='#F0F0F0'> 
+            </div> 
+            <div class='notes span-4 last'> 
+              ← What colour should the background of this graph be?
+            </div> 
+          </div>
+          <div class='row'>
+            <div class='label span-4'> 
+              <label>Grid Background Color:</label> 
+            </div> 
+            <div class='input span-4'> 
+              <input name='background-color' size='10' type='text' placeholder='#FFFFFF'> 
+            </div> 
+            <div class='notes span-4 last'> 
+              ← What colour should the grid background of this graph be?
+            </div> 
+          </div>
+          <div class='row'>
+            <div class='label span-4'> 
+              <label>Line Color:</label> 
+            </div> 
+            <div class='input span-4'> 
+              <input name='line-color' size='10' type='text' placeholder='#FF0066'> 
+            </div> 
+            <div class='notes span-4 last'> 
+              ← What colour should the line be?
+            </div> 
+          </div>
+          <div class='row'>
+            <div class='label span-4'> 
+              <label>Grid Color:</label> 
+            </div> 
+            <div class='input span-4'> 
+              <input name='grid-color' size='10' type='text' placeholder='#EFEFEF'> 
+            </div> 
+            <div class='notes span-4 last'> 
+              ← What colour should the grid be?
+            </div> 
+          </div>
+          <div class='row'>
+            <div class='label span-4'> 
+              <label>Border Color:</label> 
+            </div> 
+            <div class='input span-4'> 
+              <input name='border-color' size='10' type='text' placeholder='#9D9D9D'> 
+            </div> 
+            <div class='notes span-4 last'> 
+              ← What colour should the border around the graph be?
+            </div> 
+          </div>
+          <div class='row'>
+            <div class='label span-4'> 
+              <label>Text Color:</label> 
+            </div> 
+            <div class='input span-4'> 
+              <input name='text-color' size='10' type='text' placeholder='#555555'> 
+            </div> 
+            <div class='notes span-4 last'> 
+              ← What colour should the text on the graph be?
+            </div> 
+          </div>
         </fieldset> 
-        <div class='label span-4'> 
-          <label> 
-            &nbsp;
-          </label> 
-        </div> 
-        <div class='input span-4 last'> 
-          <input type='submit' value='Generate HTML'> 
-        </div> 
-        <div class='notes span-4 last'> 
-          Let's Go! →
-        </div> 
+        <div class='row'>
+          <div class='label span-4'> 
+            <label> 
+              &nbsp;
+            </label> 
+          </div> 
+          <div class='input span-4 last'> 
+            <input type='submit' value='Generate HTML'> 
+          </div> 
+          <div class='notes span-4 last'> 
+            Let's Go! →
+          </div> 
+        </div>
       </form> 
       <div class='span-12 last'> 
         <h2>Result</h2> 
-        <pre><code id='result'><div id="graph" class="pachube-graph" pachube-resource="/feeds/504/datastreams/1" pachube-key="1iObDqRLQTi6Z3L-Gf7rKBJfSfSvrwFsmE83KrpYtCY" pachube-options="timespan:24 hours;rolling:on;background-color:#FFFFFF;line-color:#FF0066;grid-color:#EFEFEF;border-color:#9D9D9D;text-color:#555555;" style="width:420px;height:240px;background:#FFFFFF;">Graph: Feed 504, Datastream 1</div>
-<script type="text/javascript" src="//www.pachube.com/widgets/PachubeLoader.js"></script></code></pre> 
+        <pre><code id='result'><div id="graph" class="pachube-graph" pachube-resource="/feeds/504/datastreams/1" pachube-key="1iObDqRLQTi6Z3L-Gf7rKBJfSfSvrwFsmE83KrpYtCY" pachube-options="timespan:24 hours;rolling:on;background-color:#FFFFFF;line-color:#FF0066;grid-color:#EFEFEF;border-color:#9D9D9D;text-color:#555555;" style="width:420px;height:240px;">Graph: Feed 504, Datastream 1</div>
+<script type="text/javascript" src="lib/PachubeLoader.js"></script></code></pre> 
         <br> 
         <h2>Embeddable Code</h2> 
-        <pre><code id='embeddable_code'>&lt;div id="graph" class="pachube-graph" pachube-resource="/feeds/504/datastreams/1" pachube-key="1iObDqRLQTi6Z3L-Gf7rKBJfSfSvrwFsmE83KrpYtCY" pachube-options="timespan:24 hours;rolling:on;background-color:#FFFFFF;line-color:#FF0066;grid-color:#EFEFEF;border-color:#9D9D9D;text-color:#555555;" style="width:420px;height:240px;background:#FFFFFF;"&gt;Graph: Feed 504, Datastream 1&lt;/div&gt;
-&lt;script type="text/javascript" src="//www.pachube.com/widgets/PachubeLoader.js"&gt;&lt;/script&gt;</code></pre> 
+        <pre><code id='embeddable_code'>&lt;div id="graph" class="pachube-graph" pachube-resource="/feeds/504/datastreams/1" pachube-key="1iObDqRLQTi6Z3L-Gf7rKBJfSfSvrwFsmE83KrpYtCY" pachube-options="timespan:24 hours;rolling:on;background-color:#FFFFFF;line-color:#FF0066;grid-color:#EFEFEF;border-color:#9D9D9D;text-color:#555555;" style="width:420px;height:240px;"&gt;Graph: Feed 504, Datastream 1&lt;/div&gt;
+&lt;script type="text/javascript" src="lib/PachubeLoader.js"&gt;&lt;/script&gt;</code></pre> 
       </div> 
     </div> 
   </body> 
