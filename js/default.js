@@ -38,8 +38,10 @@ $(function() {
     $('#embeddable_code').text(result);
   }
 
-  $('#ourForm').submit(function(evt) {
+  $('#ourForm :input').bind('change', function(evt) {
     submitForm(evt);
     return false;
   });
+
+  $('form').submit(function(evt) { return false; }); // So the form will not submit
 });
