@@ -43,10 +43,10 @@
           </legend> 
           <div class="row">
             <div class='label span-4'> 
-              <label>Feed ID:</label> 
+              <label for="id">Feed ID:</label> 
             </div> 
             <div class='input span-4'> 
-              <input name='id' placeholder='504' type='text'> 
+              <input name='id' placeholder='504' type='text' id="id" /> 
             </div> 
             <div class='notes span-4 last'> 
               ← Which Pachube feed are we getting data from?
@@ -54,10 +54,10 @@
           </div>
           <div class="row">
             <div class='label span-4'> 
-              <label>Datastream ID:</label> 
+              <label for="stream_id">Datastream ID:</label> 
             </div> 
             <div class='input span-4'> 
-              <input name='stream_id' placeholder='1' type='text'> 
+              <input name='stream_id' placeholder='1' type='text' id="stream_id"/>
             </div> 
             <div class='notes span-4 last'> 
               ← This is the datastream to graph.  It must contain numeric data.
@@ -65,10 +65,10 @@
           </div>
           <div class="row">
             <div class='label span-4'> 
-              <label>API Key:</label> 
+              <label for="key">API Key:</label> 
             </div> 
             <div class='input span-4'> 
-              <input name='key' type='text' placeholder='1iObDqRLQTi6Z3L-Gf7rKBJfSfSvrwFsmE83KrpYtCY'> 
+              <input name='key' type='text' placeholder='1iObDqRLQTi6Z3L-Gf7rKBJfSfSvrwFsmE83KrpYtCY' id="key" />
             </div> 
             <div class='notes span-4 last'> 
               ← This is the API Key used to set up this graph.  Because this will be publicly accessible, a great choice is to use a GET-only Secure Sharing Key.
@@ -81,10 +81,10 @@
           </legend> 
           <div class="row">
             <div class='label span-4'> 
-              <label>Rolling:</label> 
+              <label for="rolling">Rolling:</label> 
             </div> 
             <div class='input span-4'> 
-              <input name='rolling' type='checkbox'> 
+              <input name='rolling' type='checkbox' id="rolling" /> 
             </div> 
             <div class='notes span-4 last'> 
               ← Should this graph finish "now"?  If selected the right-edge of this graph will be the time when it was loaded.
@@ -92,10 +92,10 @@
           </div>
           <div class="row">
             <div class='label span-4'> 
-              <label>Auto-Update:</label> 
+              <label for="update">Auto-Update:</label> 
             </div> 
             <div class='input span-4'> 
-              <input name='update' type='checkbox'> 
+              <input name='update' type='checkbox' id="update" /> 
             </div> 
             <div class='notes span-4 last'> 
               ← Should this graph automatically update as new data is received?
@@ -103,10 +103,10 @@
           </div>
           <div class="row">
             <div class='label span-4'> 
-              <label>Default Timespan:</label> 
+              <label for="timespan">Default Timespan:</label> 
             </div> 
             <div class='input span-4'> 
-              <select name='timespan'> 
+              <select name='timespan' id="timespan"> 
                 <option value='last hour'>last hour</option> 
                 <option selected value='24 hours'>24 hours</option> 
                 <option value='4 days'>4 days</option> 
@@ -124,10 +124,10 @@
           </legend> 
           <div class='row'>
             <div class='label span-4'> 
-              <label>Width:</label> 
+              <label for="width">Width:</label> 
             </div> 
             <div class='input span-4'> 
-              <input name='width' size='10' type='text' placeholder='420px'> 
+              <input name='width' size='10' type='text' placeholder='420px' id="width" /> 
             </div> 
             <div class='notes span-4 last'> 
               ← How wide should this graph be?
@@ -135,10 +135,10 @@
           </div>
           <div class='row'>
             <div class='label span-4'> 
-              <label>Height:</label> 
+              <label for="height">Height:</label> 
             </div> 
             <div class='input span-4'> 
-              <input name='height' size='10' type='text' placeholder='240px'> 
+              <input name='height' size='10' type='text' placeholder='240px' id="height" />
             </div> 
             <div class='notes span-4 last'> 
               ← How tall should this graph be?
@@ -146,10 +146,10 @@
           </div>
           <div class='row'>
             <div class='label span-4'> 
-              <label>Background Color:</label> 
+              <label for="background">Background Color:</label> 
             </div> 
             <div class='input span-4'> 
-              <input name='background' size='10' type='text' placeholder='#F0F0F0'> 
+              <input name='background' size='10' type='text' placeholder='#F0F0F0' id="background" />
             </div> 
             <div class='notes span-4 last'> 
               ← What colour should the background of this graph be?
@@ -157,10 +157,10 @@
           </div>
           <div class='row'>
             <div class='label span-4'> 
-              <label>Grid Background Color:</label> 
+              <label for="background-color">Grid Background Color:</label> 
             </div> 
             <div class='input span-4'> 
-              <input name='background-color' size='10' type='text' placeholder='#FFFFFF'> 
+              <input name='background-color' size='10' type='text' placeholder='#FFFFFF' id="background-color" /> 
             </div> 
             <div class='notes span-4 last'> 
               ← What colour should the grid background of this graph be?
@@ -168,10 +168,10 @@
           </div>
           <div class='row'>
             <div class='label span-4'> 
-              <label>Line Color:</label> 
+              <label for="line-color">Line Color:</label> 
             </div> 
             <div class='input span-4'> 
-              <input name='line-color' size='10' type='text' placeholder='#FF0066'> 
+              <input name='line-color' size='10' type='text' placeholder='#FF0066' id="line-color" /> 
             </div> 
             <div class='notes span-4 last'> 
               ← What colour should the line be?
@@ -179,10 +179,10 @@
           </div>
           <div class='row'>
             <div class='label span-4'> 
-              <label>Grid Color:</label> 
+              <label for="grid-color">Grid Color:</label> 
             </div> 
             <div class='input span-4'> 
-              <input name='grid-color' size='10' type='text' placeholder='#EFEFEF'> 
+              <input name='grid-color' size='10' type='text' placeholder='#EFEFEF' id="grid-color" /> 
             </div> 
             <div class='notes span-4 last'> 
               ← What colour should the grid be?
@@ -190,10 +190,10 @@
           </div>
           <div class='row'>
             <div class='label span-4'> 
-              <label>Border Color:</label> 
+              <label for="border-color">Border Color:</label> 
             </div> 
             <div class='input span-4'> 
-              <input name='border-color' size='10' type='text' placeholder='#9D9D9D'> 
+              <input name='border-color' size='10' type='text' placeholder='#9D9D9D' id="border-color" /> 
             </div> 
             <div class='notes span-4 last'> 
               ← What colour should the border around the graph be?
@@ -201,10 +201,10 @@
           </div>
           <div class='row'>
             <div class='label span-4'> 
-              <label>Text Color:</label> 
+              <label for="text-color">Text Color:</label> 
             </div> 
             <div class='input span-4'> 
-              <input name='text-color' size='10' type='text' placeholder='#555555'> 
+              <input name='text-color' size='10' type='text' placeholder='#555555' id="text-color" /> 
             </div> 
             <div class='notes span-4 last'> 
               ← What colour should the text on the graph be?
