@@ -112,7 +112,7 @@ $(function() {
     // Save our values to the server
     saveUserData();
 
-    var link_url = script_url + '?';
+    var link_url = script_url + '/?';
     var url_values = [];
     for (var key in data.user) {
       if (values[key] != undefined && values[key] != '') {
