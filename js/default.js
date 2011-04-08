@@ -44,22 +44,28 @@ $(function() {
   }
 
   function fetchUserData(token) {
-    $('form fieldset#data').hide();
     $.get(apps_url + "/conf/" + token, function(response) {
       data = response;
-      $('form input[name="id"]').val(data.system.get[0].feed_id);
-      $('form input[name="stream_id"]').val(data.system.get[0].datastream_id);
-      $('form input[name="key"]').val(data.system.get[0].key);
-
-      for (var i in data.user) {
-        if (data.user.hasOwnProperty(i) && urlParams[i] == undefined) {
-          $('form [name="'+i+'"]').val(data.user[i]);
-        }
+      if (data.system.get != undefined) {
+        // If we got an api key back from storage
+        $('form fieldset#data').hide();
+        $('form input[name="id"]').val(data.system.get[0].feed_id);
+        $('form input[name="stream_id"]').val(data.system.get[0].datastream_id);
+        $('form input[name="key"]').val(data.system.get[0].key);
       }
 
-      // A few special fields we need to set up
-      if (data.user['rolling'] == 'on') { $('form [name="rolling"]').attr({'checked':true}); }
-      if (data.user['update']  == 'on') { $('form [name="update"]').attr({'checked':true});  }
+      if (data.user != undefined) {
+        // If we have stored user data, pre-populate the form
+        for (var i in data.user) {
+          if (data.user.hasOwnProperty(i) && urlParams[i] == undefined) {
+            $('form [name="'+i+'"]').val(data.user[i]);
+          }
+        }
+
+        // A few special fields we need to set up
+        if (data.user['rolling'] == 'on') { $('form [name="rolling"]').attr({'checked':true}); }
+        if (data.user['update']  == 'on') { $('form [name="update"]').attr({'checked':true});  }
+      }
 
       updateSource();
     });
